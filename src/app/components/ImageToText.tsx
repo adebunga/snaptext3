@@ -23,6 +23,7 @@ export default function ImageToText() {
         
         if (!mounted) return;
         
+        setProgress('Loading OCR engine...');
         await worker.load();
         await worker.loadLanguage('eng');
         await worker.initialize('eng');
@@ -100,7 +101,8 @@ export default function ImageToText() {
     setProgress('Processing your image...');
 
     try {
-      const { data: { text } } = await worker.recognize(file);
+      const processedFile = await preprocessImage(file);
+      const { data: { text } } = await worker.recognize(processedFile);
       setResult(text || 'No text was found in the image.');
     } catch (error) {
       console.error('Error processing image:', error);
