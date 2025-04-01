@@ -11,7 +11,7 @@ export default function ImageToText() {
   const [isLoading, setIsLoading] = useState(false);
   const [progress, setProgress] = useState<string>('');
   const [showCopyTooltip, setShowCopyTooltip] = useState(false);
-  const workerRef = useRef<Worker | null>(null);
+  const workerRef = useRef<any>(null);
 
   // Initialize worker when component mounts
   useEffect(() => {
