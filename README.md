@@ -1,15 +1,46 @@
-# Ansh & Riley Full-Stack Template
+# SnapText - OCR Image to Text Converter
 
-This is a full-stack template project for Software Composers to create  applications with AI.
+A modern web application that converts images to text using OCR (Optical Character Recognition) technology. Built with Next.js 14, TypeScript, and Tailwind CSS.
 
-## Getting started
-To create a new project, you go to `/paths`, choose from our list of Paths, and then use Cursor's Composer feature to quickly scaffold your project!
+## Features
 
-You can also edit the Path's prompt template to be whatever you like!
+- Upload images and extract text using Tesseract.js OCR
+- Real-time progress updates during text extraction
+- Copy extracted text to clipboard
+- Modern, responsive UI with beautiful gradients and animations
+- Client-side processing for privacy
 
-## Technologies used
-This doesn't really matter, but is useful for the AI to understand more about this project. We are using the following technologies
-- React with Next.js 14 App Router
-- TailwindCSS
-- Firebase Auth, Storage, and Database
-- Multiple AI endpoints including OpenAI, Anthropic, and Replicate using Vercel's AI SDK
+## Tech Stack
+
+- Next.js 14 (App Router)
+- TypeScript
+- Tailwind CSS
+- Tesseract.js for OCR
+- Vercel for deployment
+
+## Getting Started
+
+1. Clone the repository:
+```bash
+git clone https://github.com/adebunga/snaptext2.git
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Run the development server:
+```bash
+npm run dev
+```
+
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Deployment
+
+This project is configured for deployment on Vercel. Simply connect your GitHub repository to Vercel and it will automatically deploy your application.
+
+## License
+
+MIT

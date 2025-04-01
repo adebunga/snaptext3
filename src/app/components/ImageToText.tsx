@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { createWorker } from 'tesseract.js';
+import type { Worker, LoggerMessage } from 'tesseract.js';
 
 export default function ImageToText() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -10,7 +11,7 @@ export default function ImageToText() {
   const [isLoading, setIsLoading] = useState(false);
   const [progress, setProgress] = useState<string>('');
   const [showCopyTooltip, setShowCopyTooltip] = useState(false);
-  const workerRef = useRef<any>(null);
+  const workerRef = useRef<Worker | null>(null);
 
   // Initialize worker when component mounts
   useEffect(() => {
@@ -22,17 +23,12 @@ export default function ImageToText() {
         
         if (!mounted) return;
         
-        setProgress('Loading OCR engine...');
+        await worker.load();
         await worker.loadLanguage('eng');
-        
-        if (!mounted) return;
-        
-        setProgress('Initializing...');
         await worker.initialize('eng');
         
         if (!mounted) return;
         
-        setProgress('Ready!');
         workerRef.current = worker;
       } catch (error) {
         console.error('Error initializing worker:', error);
@@ -54,7 +50,7 @@ export default function ImageToText() {
 
   const preprocessImage = async (file: File): Promise<File> => {
     return new Promise((resolve) => {
-      const img = new Image();
+      const img = document.createElement('img');
       img.onload = () => {
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d')!;
@@ -150,6 +146,7 @@ export default function ImageToText() {
                     fill
                     className="object-contain rounded-lg p-2"
                     unoptimized
+                    priority
                   />
                   <label
                     htmlFor="imageUpload"
